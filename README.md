@@ -15,6 +15,7 @@ The current function also guarantees you will have an even distribution of all a
 To apply this to your current Kafka code use a customer partitioner. This blog shows a great in depth example on how to do this:
 [http://howtoprogram.xyz/2016/06/04/write-apache-kafka-custom-partitioner/](http://howtoprogram.xyz/2016/06/04/write-apache-kafka-custom-partitioner/)
 
+![Screenshot](https://raw.githubusercontent.com/fneves/kafka_partitioner/master/chart.png)
 # Run the code
 
 ```bash

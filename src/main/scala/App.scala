@@ -14,7 +14,6 @@ object App {
     val maxRecords = 100
     val windowSpan = 20
     val generator = new SecureRandom()
-    val bigAccount = generator.nextInt(12)
     val groupSize = nAccounts / 3
     val usersPerAccount = 0.to(nAccounts).map { i =>
       if(i < groupSize) {
@@ -53,10 +52,12 @@ object App {
       }
     }
 
-    startServer()
-
+    println("Calculating distribution. Please be patient as this might take some time...")
     implicit val ec = scala.concurrent.ExecutionContext.global
     0.to(nAccounts).map { accountId => Future { generateRecords(accountId, nPartitions, windowSpan) } }.foreach(Await.result(_, 10 seconds))
+
+    startServer()
+
     partitions.zipWithIndex.foreach{ case (el, index) => println(s"${index}: ${el}") }
 
     val partitionsMean = mean(partitions: _*)
